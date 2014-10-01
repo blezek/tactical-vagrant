@@ -11,6 +11,8 @@ Start using your local TACTIC @ [http://localhost:3080](http://localhost:3080) w
 
 ## Usage (Slightly more detailed)
 
+Install [VirtualBox](https://www.virtualbox.org/) and the excellent [Vagrant](http://www.vagrantup.com/).
+
 ```bash
 env BRANCH=4.2 vagrant up
 ```
