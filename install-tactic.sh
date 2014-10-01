@@ -1,6 +1,7 @@
 #!/bin/sh
 
-
+branch=$1
+echo "installing TACTIC ($branch)"
 echo "installing python"
 yum install -y python python-lxml python-devel
 
@@ -33,7 +34,7 @@ echo "checking out TACTIC"
 if [ ! -e TACTIC ]; then
   git clone https://github.com/Southpaw-TACTIC/TACTIC.git
 fi
-(cd TACTIC && git checkout 4.2)
+(cd TACTIC && git checkout $branch)
 
 
 
@@ -58,6 +59,7 @@ cat >> /var/www/html/index.html << EOF
 EOF
 
 chmod 644 /var/www/html/index.html
+service httpd restart
 
 echo "starting TACTIC"
 cp /home/apache/tactic/src/install/service/tactic /etc/init.d/tactic

@@ -29,7 +29,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # Setup TACTIC
-  config.vm.provision "shell", path: "install-tactic.sh"
+  branch = ENV['BRANCH'] || "master"
+  config.vm.provision "shell", path: "install-tactic.sh", args: branch
   config.vm.provider :virtualbox do |vb|
     # Give TACTIC 2G and 2CPUS
     vb.customize ["modifyvm", :id, "--memory", "2048"]
