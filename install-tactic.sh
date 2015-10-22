@@ -47,6 +47,8 @@ service postgresql-9.2 start
 
 echo "starting http"
 service httpd start
+# TACTIC requires the apache account to have a real shell
+usermod --shell /bin/bash apache
 
 cd TACTIC
 yes | python src/install/install.py -d -i True
@@ -64,5 +66,10 @@ service httpd restart
 echo "starting TACTIC"
 cp /home/apache/tactic/src/install/service/tactic /etc/init.d/tactic
 chmod 755 /etc/init.d/tactic
-/sbin/chkconfig tactic on
 /etc/init.d/tactic start
+
+
+echo "configuring services to restart"
+/sbin/chkconfig tactic on
+/sbin/chkconfig httpd on
+/sbin/chkconfig postgresql-9.2 on
